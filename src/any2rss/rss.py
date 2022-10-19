@@ -1,4 +1,5 @@
-"""Generate an actual RSS feed from """
+"""Generate an actual RSS feed from internal data structures."""
+
 import datetime
 from email.utils import format_datetime
 

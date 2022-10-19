@@ -7,7 +7,7 @@ from funcy import first
 from any2rss.api import RSSFeed, RSSItem, HTML
 
 
-def get_url(extra: dict[str, str] | None):
+def get_url(extra: dict[str, str]):
     """Return the URL to fetch, can be parameterized using extra arguments"""
     return "https://the-whiteboard.com/"
 

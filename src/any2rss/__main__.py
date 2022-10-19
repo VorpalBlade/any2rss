@@ -1,3 +1,5 @@
+"""Main entry point"""
+
 import argparse
 import importlib
 import importlib.util
@@ -69,17 +71,22 @@ def main():
         # response = requests.get(url)
         content = response.content
 
+    # Parse the HTML code
     parser = "html.parser"
     if hasattr(mod, "get_parser"):
         parser = mod.get_parser(extra=extra)
 
     soup = bs4.BeautifulSoup(content, parser)
 
+    # Extract the feed using user provided module
     feed: RSSFeed = mod.extract(soup, extra=extra)
+
+    # Clean up HTML
     clean_feed(feed, soup, url)
     if args.debug:
         print(feed)
 
+    # Generate RSS
     print(generate_rss(feed, url).decode("utf-8"))
 
 

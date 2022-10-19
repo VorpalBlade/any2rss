@@ -1,9 +1,8 @@
-"""
-API for parsers to use. Everything else of any2rss is considered private.
-"""
+"""API for parsers to use. Everything else of any2rss is considered private."""
 
 import dataclasses
 import datetime
+from typing import Optional, Union
 
 import bs4
 
@@ -14,7 +13,7 @@ class HTML:
 
     data: bs4.element.Tag
     # URL that things are relative to. By default, this will be figured out automatically
-    url_base: str | None = None
+    url_base: Optional[str] = None
 
 
 @dataclasses.dataclass
@@ -25,11 +24,11 @@ class RSSItem:
     title: str
     # Description of item, required. Typically, this contains data extracted from the page,
     # such the image from a web comic, or article text from a news site.
-    description: str | HTML
+    description: Union[str, HTML]
     # Optional link to the source.
-    link: str | None = None
+    link: Optional[str] = None
     # Optional publish datetime.
-    published: datetime.datetime | None = None
+    published: Optional[datetime.datetime] = None
 
 
 @dataclasses.dataclass
@@ -42,6 +41,6 @@ class RSSFeed:
     items: list[RSSItem]
     # Link to the feed, typically link to website.
     # Required in RSS, but will be defaulted to the site URL.
-    link: str | None = None
+    link: Optional[str] = None
     # Description of feed, required in RSS, will be defaulted to "No description".
-    description: str | None = None
+    description: Optional[str] = None

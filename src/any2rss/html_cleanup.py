@@ -1,3 +1,5 @@
+"""Implements HTML cleanup and converting links to be absolute."""
+
 from urllib.parse import urljoin
 
 import bleach
