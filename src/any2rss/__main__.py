@@ -34,6 +34,11 @@ def main():
         action="store_true",
         help="Print debug output (will make output invalid XML)",
     )
+    parser.add_argument(
+        "--pub-url",
+        default=None,
+        help="Publication URL for this feed. Used to add some metadata to feed.",
+    )
     def_file = parser.add_mutually_exclusive_group(required=True)
     def_file.add_argument("-f", "--file", type=Path, help="Path to definition file")
     def_file.add_argument("-m", "--module", type=str, help="Module name for definition")
@@ -87,7 +92,7 @@ def main():
         print(feed)
 
     # Generate RSS
-    print(generate_rss(feed, url).decode("utf-8"))
+    print(generate_rss(feed, url, pub_url=args.pub_url).decode("utf-8"))
 
 
 def clean_feed(feed: RSSFeed, soup: bs4.BeautifulSoup, url: str):

@@ -2,12 +2,21 @@
 
 import datetime
 from email.utils import format_datetime
+from typing import Optional
 
 import lxml.etree
-from lxml.builder import E
+from lxml.builder import ElementMaker
 
 from . import _version
 from .api import RSSItem, RSSFeed
+
+_NSMAP = {"atom": "http://www.w3.org/2005/Atom"}
+
+E = ElementMaker(nsmap=_NSMAP)
+EAtom = ElementMaker(
+    namespace="http://www.w3.org/2005/Atom",
+    nsmap=_NSMAP,
+)
 
 
 def generate_entry(item: RSSItem):
@@ -34,7 +43,7 @@ def generate_entry(item: RSSItem):
     )
 
 
-def generate_rss(feed: RSSFeed, url: str):
+def generate_rss(feed: RSSFeed, url: str, pub_url: Optional[str] = None):
     children = []
     items = [generate_entry(e) for e in feed.items]
     if feed.description:
@@ -45,6 +54,10 @@ def generate_rss(feed: RSSFeed, url: str):
         children.append(E("link", feed.link))
     else:
         children.append(E("link", url))
+    if pub_url:
+        children.append(
+            EAtom("link", href=pub_url, rel="self", type="application/rss+xml")
+        )
     channel = E(
         "channel",
         E("title", feed.title),
@@ -54,7 +67,11 @@ def generate_rss(feed: RSSFeed, url: str):
         *children,
         *items,
     )
-    rss = E("rss", channel, version="2.0")
+    rss = E(
+        "rss",
+        channel,
+        version="2.0",
+    )
     return lxml.etree.tostring(
         rss, pretty_print=True, xml_declaration=True, encoding="UTF-8"
     ).strip()
