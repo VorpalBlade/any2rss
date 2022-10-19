@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "any2rss"
+description = "Create RSS feeds from broken websites"
+readme = "README.md"
+authors = [
+    { name = "Arvid Norlander", email = "VorpalBlade@users.noreply.github.com" }
+]
+license = { text = "AGPL3" }
+dependencies = [
+    "appdirs",
+    "beautifulsoup4",
+    "bleach",
+    "cachecontrol[filecache]",
+    "funcy",
+    "lxml",
+    "requests",
+]
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/VorpalBlade/any2rss"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+any2rss = "any2rss.__main__:main"
+
+[tool.setuptools_scm]
+write_to = "src/any2rss/_version.py"
