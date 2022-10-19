@@ -1,0 +1,6 @@
+__pycache__
+*.egg-info
+*~
+/.idea
+/*.code-workspace
+/src/any2rss/_version.py
