@@ -3,6 +3,7 @@
 import datetime
 from email.utils import format_datetime
 from typing import Optional
+import hashlib
 
 import lxml.etree
 from lxml.builder import ElementMaker
@@ -20,23 +21,25 @@ EAtom = ElementMaker(
 
 
 def generate_entry(item: RSSItem):
+    m = hashlib.sha256()
+    m.update(item.link.encode("utf-8"))
+    m.update(item.title.encode("utf-8"))
+    m.update(item.description.encode("utf-8"))
+
     children = []
     if item.link:
         children.append(E("link", item.link))
     if item.published:
-        children.append(E("pubDate", format_datetime(item.published)))
+        formatted_date = format_datetime(item.published)
+        children.append(E("pubDate", formatted_date))
+        m.update(formatted_date.encode("utf-8"))
     return E(
         "item",
         E("title", item.title),
         E("description", item.description),
         E(
             "guid",
-            hex(
-                hash(item.description)
-                ^ hash(item.link)
-                ^ hash(item.title)
-                ^ hash(item.published)
-            ),
+            m.hexdigest(),
             isPermaLink="false",
         ),
         *children,
