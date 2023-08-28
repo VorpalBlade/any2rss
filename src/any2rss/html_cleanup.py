@@ -8,7 +8,9 @@ import bs4
 from .api import HTML
 
 _cleaner = bleach.sanitizer.Cleaner(
-    tags=bleach.sanitizer.ALLOWED_TAGS.union(["img", "div", "h1", "h2", "h3", "h4", "h5", "p", "br"]),
+    tags=bleach.sanitizer.ALLOWED_TAGS.union(
+        ["img", "div", "h1", "h2", "h3", "h4", "h5", "p", "br"]
+    ),
     attributes=bleach.sanitizer.ALLOWED_ATTRIBUTES | {"img": ["src"]},
 )
 
