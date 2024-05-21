@@ -9,7 +9,7 @@ funcy==2.0
 idna==3.7
 lxml==4.9.3
 msgpack==1.0.5
-requests==2.31.0
+requests==2.32.0
 six==1.16.0
 soupsieve==2.4.1
 urllib3==2.0.7
