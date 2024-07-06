@@ -2,7 +2,7 @@ appdirs==1.4.4
 beautifulsoup4==4.12.2
 bleach==6.0.0
 CacheControl==0.13.1
-certifi==2023.7.22
+certifi==2024.7.4
 charset-normalizer==3.2.0
 filelock==3.12.3
 funcy==2.0
