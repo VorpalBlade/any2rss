@@ -1,6 +1,6 @@
 appdirs==1.4.4
 beautifulsoup4==4.13.3
-bleach==6.2.0
+bleach==6.4.0
 CacheControl==0.14.2
 certifi==2025.1.31
 charset-normalizer==3.4.1
