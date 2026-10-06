@@ -12,5 +12,5 @@ msgpack==1.2.1
 requests==2.33.0
 soupsieve==2.9
 typing_extensions==4.12.2
-urllib3==2.7.0
+urllib3==2.8.0
 webencodings==0.5.1
